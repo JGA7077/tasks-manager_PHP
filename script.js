@@ -12,7 +12,6 @@ const getAllTasks = () => {
     fetch("http://localhost/gerenciador-tarefas/getTasks.php")
     .then(response => response.json())
     .then((data) => {
-      console.log('data ==>', data);
       const {tasks = []} = data;
       if (!tasks.length) return;
 
