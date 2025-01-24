@@ -3,3 +3,15 @@
 body {
   background-color: #121212;
 }
+
+.card {
+  @apply block bg-amber-200
+}
+
+.card__title {
+  @apply mt-4 text-lg font-bold text-gray-900 sm:text-xl
+}
+
+.card__subtitle {
+  @apply mt-2 max-w-sm text-gray-700
+}
