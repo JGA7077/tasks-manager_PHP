@@ -5,6 +5,27 @@ form.addEventListener("submit", e => {
 
   const titleInput = e.target.querySelector("input#title-card").value;
   const descriptionInput = e.target.querySelector("input#description-card").value;
+
+  try {
+    fetch("http://localhost/gerenciador-tarefas/addTask.php", {
+      method: "POST",
+      body: JSON.stringify({
+        title: titleInput,
+        description: descriptionInput
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        console.log('data ==>', data);
+      }
+    })
+  } catch (error) {
+    console.log('error on trying to CREATE tasks: ', error);
+  }
 });
 
 const getAllTasks = () => {
