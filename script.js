@@ -1,17 +1,44 @@
 const form = document.querySelector("#tasks-form");
+const titleInput = form.querySelector("input#title-card")
+
+const addTaskOnList = (taskArr) => {
+  const tasksList = document.querySelector(".grid.tasks-list");
+
+  taskArr.forEach(({title, description, id}) => {
+    const linkElement = document.createElement("a");
+    linkElement.classList.add("card");
+    linkElement.setAttribute("title", id);
+
+    const titleElement = document.createElement("h3");
+    titleElement.classList.add("card__title");
+    titleElement.textContent = title;
+
+    const subtitleElement = document.createElement("p");
+    subtitleElement.classList.add("card__subtitle");
+    subtitleElement.textContent = description;
+
+    linkElement.appendChild(titleElement);
+    linkElement.appendChild(subtitleElement);
+
+    tasksList.appendChild(linkElement);
+  });
+
+  form.reset();
+  titleInput.focus();
+}
 
 form.addEventListener("submit", e => {
   e.preventDefault();
 
-  const titleInput = e.target.querySelector("input#title-card").value;
-  const descriptionInput = e.target.querySelector("input#description-card").value;
+  const titleValue = titleInput.value;
+  const descriptionValue = e.target.querySelector("input#description-card").value;
 
   try {
-    fetch("http://localhost/gerenciador-tarefas/addTask.php", {
+    fetch("http://localhost/gerenciador-tarefas/tasks/addTask.php", {
       method: "POST",
       body: JSON.stringify({
-        title: titleInput,
-        description: descriptionInput
+        title: titleValue,
+        description: descriptionValue
       }),
       headers: {
         "Content-Type": "application/json"
@@ -20,7 +47,10 @@ form.addEventListener("submit", e => {
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        console.log('data ==>', data);
+        addTaskOnList([data.task]);
+
+        const noTaskWarning = document.querySelector("strong.no-task-warning");
+        noTaskWarning.classList.toggle("hidden");
       }
     })
   } catch (error) {
@@ -30,32 +60,19 @@ form.addEventListener("submit", e => {
 
 const getAllTasks = () => {
   try {
-    fetch("http://localhost/gerenciador-tarefas/getTasks.php")
+    fetch("http://localhost/gerenciador-tarefas/tasks/getTasks.php")
     .then(response => response.json())
     .then((data) => {
       const {tasks = []} = data;
-      if (!tasks.length) return;
+      if (!tasks.length) {
 
-      const tasksList = document.querySelector(".grid.tasks-list");
+        const noTaskWarning = document.querySelector("strong.no-task-warning");
+        noTaskWarning.classList.toggle("hidden");
 
-      tasks.forEach(({title, description, id}) => {
-        const linkElement = document.createElement("a");
-        linkElement.classList.add("card");
-        linkElement.setAttribute("title", id);
+        return;
+      };
 
-        const titleElement = document.createElement("h3");
-        titleElement.classList.add("card__title");
-        titleElement.textContent = title;
-
-        const subtitleElement = document.createElement("p");
-        subtitleElement.classList.add("card__subtitle");
-        subtitleElement.textContent = description;
-
-        linkElement.appendChild(titleElement);
-        linkElement.appendChild(subtitleElement);
-
-        tasksList.appendChild(linkElement);
-      });
+      addTaskOnList(tasks);
     })
   } catch (error) {
     console.log('error on trying to GET tasks: ', error);
