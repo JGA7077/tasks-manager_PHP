@@ -5,7 +5,7 @@ body {
 }
 
 .card {
-  @apply block bg-amber-200
+  @apply block bg-amber-200 relative min-h-20
 }
 
 .card__title {
@@ -14,4 +14,8 @@ body {
 
 .card__subtitle {
   @apply mt-2 max-w-sm text-gray-700
+}
+
+.btn-group {
+  @apply inline-flex overflow-hidden rounded-md border bg-white shadow-sm absolute top-1.5 right-1.5
 }

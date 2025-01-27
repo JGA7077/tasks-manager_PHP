@@ -521,6 +521,9 @@
   }
 }
 @layer utilities {
+  .collapse {
+    visibility: collapse;
+  }
   .sr-only {
     position: absolute;
     width: 1px;
@@ -531,6 +534,9 @@
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+  }
+  .absolute {
+    position: absolute;
   }
   .relative {
     position: relative;
@@ -547,6 +553,9 @@
   .mb-0 {
     margin-bottom: calc(var(--spacing) * 0);
   }
+  .block {
+    display: block;
+  }
   .flex {
     display: flex;
   }
@@ -558,6 +567,19 @@
   }
   .inline-block {
     display: inline-block;
+  }
+  .inline-flex {
+    display: inline-flex;
+  }
+  .list-item {
+    display: list-item;
+  }
+  .table {
+    display: table;
+  }
+  .size-4 {
+    width: calc(var(--spacing) * 4);
+    height: calc(var(--spacing) * 4);
   }
   .w-full {
     width: 100%;
@@ -574,8 +596,17 @@
   .max-w-screen-xl {
     max-width: var(--breakpoint-xl);
   }
+  .border-collapse {
+    border-collapse: collapse;
+  }
+  .transform {
+    transform: var(--tw-rotate-x) var(--tw-rotate-y) var(--tw-rotate-z) var(--tw-skew-x) var(--tw-skew-y);
+  }
   .cursor-pointer {
     cursor: pointer;
+  }
+  .resize {
+    resize: both;
   }
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -602,14 +633,31 @@
   .rounded-lg {
     border-radius: var(--radius-lg);
   }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+  .border-e {
+    border-inline-end-style: var(--tw-border-style);
+    border-inline-end-width: 1px;
+  }
   .border-gray-200 {
     border-color: var(--color-gray-200);
+  }
+  .bg-blue-400 {
+    background-color: var(--color-blue-400);
   }
   .bg-blue-800 {
     background-color: var(--color-blue-800);
   }
   .bg-gray-300 {
     background-color: var(--color-gray-300);
+  }
+  .bg-red-500 {
+    background-color: var(--color-red-500);
+  }
+  .p-3 {
+    padding: calc(var(--spacing) * 3);
   }
   .p-4 {
     padding: calc(var(--spacing) * 4);
@@ -654,6 +702,9 @@
   .text-gray-50 {
     color: var(--color-gray-50);
   }
+  .text-gray-700 {
+    color: var(--color-gray-700);
+  }
   .text-orange-500 {
     color: var(--color-orange-500);
   }
@@ -670,11 +721,45 @@
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
+  .filter {
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .hover\:bg-gray-50 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-50);
+      }
+    }
+  }
+  .hover\:bg-gray-300 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-300);
+      }
+    }
+  }
   .hover\:bg-indigo-600 {
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-indigo-600);
       }
+    }
+  }
+  .hover\:brightness-\[0\.8\] {
+    &:hover {
+      @media (hover: hover) {
+        --tw-brightness: brightness(0.8);
+        filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+      }
+    }
+  }
+  .focus\:relative {
+    &:focus {
+      position: relative;
     }
   }
   .sm\:grid-cols-2 {
@@ -723,7 +808,9 @@ body {
   background-color: #121212;
 }
 .card {
+  position: relative;
   display: block;
+  min-height: calc(var(--spacing) * 20);
   background-color: var(--color-amber-200);
 }
 .card__title {
@@ -742,6 +829,19 @@ body {
   margin-top: calc(var(--spacing) * 2);
   max-width: var(--container-sm);
   color: var(--color-gray-700);
+}
+.btn-group {
+  position: absolute;
+  top: calc(var(--spacing) * 1.5);
+  right: calc(var(--spacing) * 1.5);
+  display: inline-flex;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border-style: var(--tw-border-style);
+  border-width: 1px;
+  background-color: var(--color-white);
+  --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
 }
 @keyframes spin {
   to {
@@ -769,10 +869,40 @@ body {
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateX(0);
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateY(0);
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateZ(0);
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: skewX(0);
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: skewY(0);
+}
 @property --tw-space-y-reverse {
   syntax: "*";
   inherits: false;
   initial-value: 0;
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
 }
 @property --tw-font-weight {
   syntax: "*";
@@ -832,4 +962,45 @@ body {
   syntax: "*";
   inherits: false;
   initial-value: 0 0 #0000;
+}
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false;
 }
