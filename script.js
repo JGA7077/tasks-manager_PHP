@@ -1,5 +1,10 @@
 const form = document.querySelector("#tasks-form");
-const titleInput = form.querySelector("input#title-card")
+const titleInput = form.querySelector("input#title-card");
+
+const DOMAIN = 
+  window.location.origin.includes("127") || window.location.origin.includes("localhost") 
+    ? "http://localhost" 
+    : window.location.origin;
 
 const addTaskOnList = (taskArr) => {
   const tasksList = document.querySelector(".grid.tasks-list");
@@ -48,7 +53,7 @@ form.addEventListener("submit", e => {
   const descriptionValue = e.target.querySelector("input#description-card").value;
 
   try {
-    fetch("http://localhost/gerenciador-tarefas/tasks/addTask.php", {
+    fetch(DOMAIN + "/gerenciador-tarefas/tasks/addTask.php", {
       method: "POST",
       body: JSON.stringify({
         title: titleValue,
@@ -74,7 +79,7 @@ form.addEventListener("submit", e => {
 
 const getAllTasks = () => {
   try {
-    fetch("http://localhost/gerenciador-tarefas/tasks/getTasks.php")
+    fetch(DOMAIN + "/gerenciador-tarefas/tasks/getTasks.php")
       .then(response => response.json())
       .then((data) => {
         const { tasks = [] } = data;
