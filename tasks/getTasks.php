@@ -19,10 +19,10 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
 } else {
     header("Access-Control-Allow-Origin: http://localhost");
 }
-
+*/
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
   exit(0);
-}*/
+}
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, OPTIONS");
