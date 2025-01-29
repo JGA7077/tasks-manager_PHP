@@ -4,7 +4,7 @@ const titleInput = form.querySelector("input#title-card");
 const DOMAIN = 
   window.location.origin.includes("127") || window.location.origin.includes("localhost") 
     ? "http://localhost" 
-    : window.location.origin;
+    : '';
 
 const addTaskOnList = (taskArr) => {
   const tasksList = document.querySelector(".grid.tasks-list");
