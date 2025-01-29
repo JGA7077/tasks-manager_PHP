@@ -2,8 +2,7 @@
 $origens_permitidas = [
     "http://localhost",
     "http://127.0.0.1:5500",
-    "https://meusite.com",
-    "https://www.meusite.com"
+    "https://tasks-manager-php.vercel.app/"
 ];
 
 if (isset($_SERVER['HTTP_ORIGIN'])) {
