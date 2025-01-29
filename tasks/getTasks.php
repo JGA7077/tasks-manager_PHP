@@ -1,8 +1,9 @@
 <?php
-$origens_permitidas = [
+/*$origens_permitidas = [
     "http://localhost",
     "http://127.0.0.1:5500",
-    "https://tasks-manager-php.vercel.app/"
+    "https://tasks-manager-php.vercel.app/",
+    "https://tasks-manager-php.vercel.app"
 ];
 
 if (isset($_SERVER['HTTP_ORIGIN'])) {
@@ -21,8 +22,9 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
   exit(0);
-}
+}*/
 
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
