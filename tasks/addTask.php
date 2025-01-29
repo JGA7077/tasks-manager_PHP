@@ -1,8 +1,38 @@
 <?php 
-header("Access-Control-Allow-Origin: *");
+$origens_permitidas = [
+    "http://localhost",
+    "http://127.0.0.1:5500",
+    "https://meusite.com",
+    "https://www.meusite.com"
+];
+
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    $origem = $_SERVER['HTTP_ORIGIN'];
+
+    if (in_array($origem, $origens_permitidas)) {
+        header("Access-Control-Allow-Origin: $origem");
+    } else {
+        http_response_code(403);
+        echo json_encode(["erro" => "Acesso negado. Origem não permitida."]);
+        exit;
+    }
+} else {
+    header("Access-Control-Allow-Origin: http://localhost");
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+  exit(0);
+}
+
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 require_once "../Task.php";
+
+
+// if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+//   http_response_code(200);
+//   exit;
+// } else
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
   http_response_code(405);
